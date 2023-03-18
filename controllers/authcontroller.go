@@ -35,5 +35,6 @@ func Login(context *gin.Context) {
 		return
 	}
 
-	context.JSON(http.StatusOK, nil)
+	user.Password = ""
+	context.JSON(http.StatusOK, user)
 }
