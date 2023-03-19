@@ -29,15 +29,11 @@ func RegisterUser(context *gin.Context) {
 	context.JSON(http.StatusCreated, gin.H{"id": user.ID, "email": user.Email, "username": user.Username})
 }
 
-type GetUserByEmailRequest struct {
-	Email string `json:"email"`
-}
-
-func GetUserByEmail(context *gin.Context) {
-	email := context.Param("email")
+func GetUserById(context *gin.Context) {
+	id := context.Param("id")
 
 	var user models.User
-	record := database.Instance.Where("email = ?", email).First(&user)
+	record := database.Instance.Where("id = ?", id).First(&user)
 	if record.Error != nil {
 		context.JSON(http.StatusInternalServerError, gin.H{"error": record.Error.Error()})
 		context.Abort()

@@ -13,7 +13,7 @@ func InitRouter() *gin.Engine {
 		api.POST("/auth/login", controllers.Login)
 		api.POST("/auth/register", controllers.RegisterUser)
 
-		api.GET("/user/:email", controllers.GetUserByEmail)
+		api.GET("/user/:id", controllers.GetUserById)
 	}
 	return router
 }
