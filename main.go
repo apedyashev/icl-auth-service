@@ -1,13 +1,13 @@
 package main
 
 import (
-	"icl-auth/database"
+	"icl-auth/pkg/adapter/datastore"
+	"icl-auth/pkg/adapter/grpc"
 )
 
 func main() {
-	database.Connect()
-	database.Migrate()
+	db := datastore.NewDB()
+	datastore.Migrate(db)
 
-	router := InitRouter()
-	router.Run(":80")
+	grpc.StartAllGrpcServers(db)
 }
